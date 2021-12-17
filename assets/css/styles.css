@@ -1,0 +1,21 @@
+body{
+    background-color: khaki;
+    color: darkgreen;
+}
+h1{
+    font-size: xx-large;
+    color: darkgreen;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-top: 2%;
+}
+
+button{
+    width: 100px;
+    height: 50px;
+    color: darkgreen;
+    font-weight: bold;
+    margin-left: 45%;
+    margin-top: 5%;
+}
