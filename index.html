@@ -7,13 +7,23 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='assets/css/reset.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='assets/css/styles.css'>
-    <script src='assets/js/script.js'></script>
+    
 </head>
 <body>
 
     <h1>Welcome to Javascript Quiz!</h1>
-    <button id="startBtn">Start!</button>
+    <span class="timer" id="countdown"></span>
+    <button id="startBtn">Click to Start!</button>
+    <div id="questionContainer">
+        <p id="question"></p>
+        <ol type="1">
+            <li ><button id="firstChoice" class="answerBtn" data-choice="A"></button></li>
+            <li ><button id="secondChoice" class="answerBtn" data-choice="B"></button></li>
+            <li ><button id="thirdChoice" class="answerBtn" data-choice="C"></button></li>
+            <li ><button id="fourthChoice" class="answerBtn" data-choice="D"></button></li>
+        </ol>
+    </div>
 
-    
+    <script src='assets/js/script.js'></script>
 </body>
 </html>

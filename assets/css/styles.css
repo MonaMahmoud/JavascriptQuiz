@@ -8,14 +8,59 @@ h1{
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
-    margin-top: 2%;
+    margin: 2%;
 }
 
 button{
-    width: 100px;
-    height: 50px;
+    width: 400px;
+    height: 100px;
+    color: khaki;
+    font-weight: bold;
+    margin-left: 35%;
+    margin-top: 5%;
+    background-color: darkgreen;
+    font-size: xx-large;
+}
+
+div{
+    border-color: navy;
+    display: none;
+    margin: auto;
+    width: 800px;
+    padding: 50px;
+    font-size: larger;
+    line-height : 100px;
+    
+}
+
+.answerBtn{
+    width: 400px;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: darkgreen;
+    color: khaki;
+}
+
+.answerBtn:hover{
+    background-color: black;
+    color: gold;
+}
+
+.timer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 100px;
+    line-height: 50px;
+    min-height: 50px;
+    text-align: center;
+    border: 3px solid darkgreen;
     color: darkgreen;
     font-weight: bold;
-    margin-left: 45%;
-    margin-top: 5%;
-}
+  }
+
+  p{
+      font-size: larger;
+  }
