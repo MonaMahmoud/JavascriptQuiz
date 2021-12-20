@@ -43,7 +43,7 @@ div{
     color: khaki;
 }
 
-.answerBtn:hover{
+button:hover{
     background-color: black;
     color: gold;
 }
@@ -62,5 +62,5 @@ div{
   }
 
   p{
-      font-size: larger;
+      font-size: xx-large;
   }

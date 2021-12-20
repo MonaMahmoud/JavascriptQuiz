@@ -31,6 +31,8 @@ var firstChoiceBtn = document.getElementById("firstChoice");
 var secondChoiceBtn = document.getElementById("secondChoice");
 var thirdChoiceBtn = document.getElementById("thirdChoice");
 var fourthChoiceBtn = document.getElementById("fourthChoice");
+var scoreBtn = document.getElementById("scoreBtn");
+var scoresList = document.getElementById("scoresList");
 
 var i=0;
 var right = 0;
@@ -47,10 +49,87 @@ function decTimer(){
     else {
       //  alert("out of time");
         clearInterval(clearTime);
-        alert(right+" questions were answered right and "+wrong +" questions were answered wrong");
+        endQuiz();
+        //alert(right+" questions were answered right and "+wrong +" questions were answered wrong");
     }
 }
 
+
+var highScores = [];
+var highScores = new Array();
+
+
+function renderScores(){
+
+    // Clear todoList element and update todoCountSpan
+//   todoList.innerHTML = "";
+//   todoCountSpan.textContent = todos.length;
+
+  // Render a new li for each todo
+  for (var j = 0; j < highScores.length; j++) {
+    var scoreItem = highScores[j];
+
+    var li = document.createElement("li");
+    console.log(highScores[j].initials + highScores[j].scoreNo);
+    li.textContent = highScores[j].initials + highScores[j].scoreNo;
+    //li.setAttribute("data-index", i);
+
+    //var button = document.createElement("button");
+   // button.textContent = "Complete ✔️";
+
+    //li.appendChild(button);
+    scoresList.appendChild(li);
+  }
+
+  document.getElementById("scoresContainer").style.display = "block";
+
+}
+
+function storeScore(){
+
+    document.getElementById("endQuizContainer").style.display = "none";
+
+    //console.log(JSON.parse(localStorage.getItem("highScores")))
+    var storedScores = JSON.parse(localStorage.getItem("highScores"));
+    //console.log("Stored Scores:"+storedScores);
+    //console.log(typeof storedScores);
+    //storedScores.push("test value");
+    //console.log("Stored Scores after test push:"+storedScores);
+    //console.log(storedScores);
+
+  // If high scores were retrieved from localStorage, update the highScores array to it
+  if (storedScores !== null) {
+    highScores = storedScores;
+    //console.log("stored scores not equal null");
+    //console.log(storeScore);
+  }
+//   else
+//   {
+//     highScores = [];
+//     console("highscores initialized");
+//   }
+
+  // This is a helper function that will render todos to the DOM
+  //renderScores();
+
+    // var score = {
+    //     initials: "",
+    //     scoreNo: ""
+    // };
+
+    // score.initials = document.getElementById("initials").value;
+    // score.scoreNo = right;
+    //console.log(highScores);
+    var score = document.getElementById("initials").value+": "+right;
+    console.log(score);
+    highScores.push(score);
+    //console.log(highScores);
+
+    //var score = document.getElementById("initials").value+":"+right;
+    //highScores.push(score);
+    localStorage.setItem("highScores",JSON.stringify(highScores));
+
+}
 
 //add event handler to the start quiz button
 startBtn.addEventListener("click",startQuiz);
@@ -58,6 +137,7 @@ firstChoiceBtn.addEventListener("click",handleChoice);
 secondChoiceBtn.addEventListener("click",handleChoice);
 thirdChoiceBtn.addEventListener("click",handleChoice);
 fourthChoiceBtn.addEventListener("click",handleChoice);
+scoreBtn.addEventListener("click",storeScore);
 
 function startQuiz(){
     startBtn.style.display = "none";
@@ -69,6 +149,11 @@ function startQuiz(){
 function endQuiz(){
 document.getElementById("questionContainer").style.display = "none";
 clearInterval(clearTime);
+document.getElementById("endQuizContainer").style.display = "block";
+document.getElementById("correctAnswers").textContent = "" + right;
+
+
+
 }
 
 function handleChoice(event){
@@ -94,6 +179,9 @@ function handleChoice(event){
         if(timer>=10){
         //deduct time from timer
         timer = timer - 10;
+
+            //add code here to jump to next question 
+
         }
         else{
             timer = 0;
