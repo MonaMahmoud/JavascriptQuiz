@@ -56,7 +56,7 @@ function decTimer(){
 
 
 var highScores = [];
-var highScores = new Array();
+//var highScores = new Array();
 
 
 function renderScores(){
