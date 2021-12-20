@@ -1,29 +1,30 @@
-
 var questions = [
-{
-    question:"Which of the following is not JavaScript Data Types?",
-    answerA:"Undefined",
-    answerB:"Float",
-    answerC:"Boolean",
-    answerD:"Number",
-    correctAnswer:"B"
-},
-{
-    question:"What are the types of Pop up boxes available in JavaScript?",
-    answerA:"Prompt",
-    answerB:"Alert",
-    answerC:"Confirm",
-    answerD:"All of the above",
-    correctAnswer:"D"
-},{
-    question:"How to write an IF statement for executing some code if 'i is NOT equal to 5'?",
-    answerA:"if(i <> 5)",
-    answerB:"if i <> 5",
-    answerC:"if ( i != 5 )",
-    answerD:"if i != 5 then",
-    correctAnswer:"C"
-}
-]
+  {
+    question: "Which of the following is not JavaScript Data Types?",
+    answerA: "Undefined",
+    answerB: "Float",
+    answerC: "Boolean",
+    answerD: "Number",
+    correctAnswer: "B",
+  },
+  {
+    question: "What are the types of Pop up boxes available in JavaScript?",
+    answerA: "Prompt",
+    answerB: "Alert",
+    answerC: "Confirm",
+    answerD: "All of the above",
+    correctAnswer: "D",
+  },
+  {
+    question:
+      "How to write an IF statement for executing some code if 'i is NOT equal to 5'?",
+    answerA: "if(i <> 5)",
+    answerB: "if i <> 5",
+    answerC: "if ( i != 5 )",
+    answerD: "if i != 5 then",
+    correctAnswer: "C",
+  },
+];
 
 var startBtn = document.getElementById("startBtn");
 var questionText = document.getElementById("question");
@@ -34,177 +35,187 @@ var fourthChoiceBtn = document.getElementById("fourthChoice");
 var scoreBtn = document.getElementById("scoreBtn");
 var scoresList = document.getElementById("scoresList");
 var countDownSpan = document.getElementById("countdown");
+var scoresContainer = document.getElementById("scoresContainer");
+var currentTitle = document.getElementById("title");
+var endQuizContainer = document.getElementById("endQuizContainer");
+var questionContainer = document.getElementById("questionContainer");
 
-var i=0;
+var i = 0;
 var right = 0;
 var wrong = 0;
 var clearTime;
-
 var timer = 120;
+var highScores = [];
 
-function decTimer(){
-    countDownSpan.style.display = "block";
-    countDownSpan.textContent = "Time: "+timer;
-    if(timer>0){
-        timer--;
-    }
-    else {
-      //  alert("out of time");
-        clearInterval(clearTime);
-        endQuiz();
-        //alert(right+" questions were answered right and "+wrong +" questions were answered wrong");
-    }
+//add event handler to the start quiz button
+startBtn.addEventListener("click", startQuiz);
+//add same event handler to answer buttons to check whether answer is correct or wrong
+firstChoiceBtn.addEventListener("click", handleChoice);
+secondChoiceBtn.addEventListener("click", handleChoice);
+thirdChoiceBtn.addEventListener("click", handleChoice);
+fourthChoiceBtn.addEventListener("click", handleChoice);
+//add event hander to store score button
+scoreBtn.addEventListener("click", storeScore);
+
+//function called every one second to decrement the timer
+function decTimer() {
+  //change display property of the timer to be visible
+  countDownSpan.style.display = "block";
+  //update timer text to show number of seconds remaining
+  countDownSpan.textContent = "Time: " + timer;
+  //there is still time: continue quiz
+  if (timer > 0) {
+    timer--;
+  }
+  //out of time: end the quiz
+  else {
+    //stop the interval function
+    clearInterval(clearTime);
+    //end the quiz and go to next screen
+    endQuiz();
+  }
 }
 
-
-var highScores = [];
-//var highScores = new Array();
-
-
-function renderScores(){
-
-  // Render a new li for each todo
+//function to render previously stored high scores into the page
+function renderScores() {
+  // Render a new li for each high score
   for (var j = 0; j < highScores.length; j++) {
-    var scoreItem = highScores[j];
-
+    //create a list item to display current high score
     var li = document.createElement("li");
-    //console.log(highScores[j].initials + highScores[j].scoreNo);
     //li.textContent = highScores[j].initials + highScores[j].scoreNo;
+
+    //set text of list item to the current high score value
     li.textContent = highScores[j];
+    //append the list item to the scores list on page
     scoresList.appendChild(li);
   }
-  document.getElementById("scoresContainer").style.display = "block";
-  document.getElementById("title").textContent = "High Scores!";
-
+  //change display property of scores container to be visible
+  scoresContainer.style.display = "block";
+  //change current title of page
+  currentTitle.textContent = "High Scores!";
 }
 
-function storeScore(){
+//function to store score into local storage
+function storeScore() {
+  //change display property of initials container to be invisible
+  endQuizContainer.style.display = "none";
+  //check if there scores previously stored in local storage
+  var storedScores = JSON.parse(localStorage.getItem("highScores"));
 
-    document.getElementById("endQuizContainer").style.display = "none";
-    var storedScores = JSON.parse(localStorage.getItem("highScores"));
-
-  // If high scores were retrieved from localStorage, update the highScores array to it
+  // If scores were retrieved from localStorage, update the highScores array to it
   if (storedScores !== null) {
-    //console.log(storedScores[0]);
     highScores = storedScores;
   }
-
-  var score = document.getElementById("initials").value+": "+right;
-    highScores.push(score);
-    localStorage.setItem("highScores",JSON.stringify(highScores));
-
-    renderScores();
+  //get the value for current score that needs to be stored
+  var score = document.getElementById("initials").value + ": " + right;
+  //add the latest score value to the scores array
+  highScores.push(score);
+  //store the whole scores array into local storage
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+  //render all the scores to be displayed on the page
+  renderScores();
 }
-
-
 //   else
 //   {
 //     highScores = [];
-//     console("highscores initialized");
 //   }
 
-  // This is a helper function that will render todos to the DOM
-  //renderScores();
+// var score = {
+//     initials: "",
+//     scoreNo: ""
+// };
 
-    // var score = {
-    //     initials: "",
-    //     scoreNo: ""
-    // };
+// score.initials = document.getElementById("initials").value;
+// score.scoreNo = right;
 
-    // score.initials = document.getElementById("initials").value;
-    // score.scoreNo = right;
-    //console.log(highScores);
-    
-    //console.log(score);
-    
-    //console.log(highScores);
-
-    //var score = document.getElementById("initials").value+":"+right;
-    //highScores.push(score);
-    
-
-
-
-//add event handler to the start quiz button
-startBtn.addEventListener("click",startQuiz);
-firstChoiceBtn.addEventListener("click",handleChoice);
-secondChoiceBtn.addEventListener("click",handleChoice);
-thirdChoiceBtn.addEventListener("click",handleChoice);
-fourthChoiceBtn.addEventListener("click",handleChoice);
-scoreBtn.addEventListener("click",storeScore);
-
-function startQuiz(){
-    startBtn.style.display = "none";
-    document.getElementById("questionContainer").style.display = "block";
-    writeQuestion();
-    clearTime = setInterval(decTimer,1000);
+//function to start the quiz
+function startQuiz() {
+  //change styling of quiz start button to be invisible
+  startBtn.style.display = "none";
+  //change styling of questions container to be visible
+  questionContainer.style.display = "block";
+  //write the first quiz question
+  writeQuestion();
+  //set the timer interval to update timer every 1 second
+  clearTime = setInterval(decTimer, 1000);
+  //change the current title of the page
+  currentTitle.textContent = "Clock is ticking!";
 }
 
-function endQuiz(){
-document.getElementById("questionContainer").style.display = "none";
-clearInterval(clearTime);
-
-document.getElementById("endQuizContainer").style.display = "block";
-document.getElementById("correctAnswers").textContent = "" + right;
-countDownSpan.style.display = "none";
-
-
+//function to end the quiz when out of timer or questions ended
+function endQuiz() {
+  //change styling of questions container to be invisible
+  questionContainer.style.display = "none";
+  //stop calling the timer function and clear the timer
+  clearInterval(clearTime);
+  //change styling of current score to be visible to show user his/her score
+  endQuizContainer.style.display = "block";
+  //display the number of correct answers to the user
+  document.getElementById("correctAnswers").textContent = "" + right;
+  //change styling of the timer to be invisible
+  countDownSpan.style.display = "none";
+  //change the current title of the page
+  currentTitle.textContent = "Save your score!";
 }
 
-function handleChoice(event){
-    //user chose correct answer
-    if(event.target.getAttribute("data-choice")==questions[i].correctAnswer){
-        right++;
-        // event.target.style.background = "pink";
-        // event.target.style.color = "navy";
-        if(i<questions.length-1){
-            i++;
-            writeQuestion();
-        }
-        else{
-            endQuiz();
-            //alert("out of questions");
-        }
-        //event.target.textContent = "correct";
-        //alert("correct answer");
+//function to check whether user chose a correct or wrong answer
+function handleChoice(event) {
+  //user chose correct answer
+  if (event.target.getAttribute("data-choice") == questions[i].correctAnswer) {
+      //increment number of correct answers
+    right++;
+    //if there are still more questions in the quiz load them
+    if (i < questions.length - 1) {
+      i++;
+      writeQuestion();
+    } 
+    //this is the last question so end the quiz
+    else {
+      endQuiz();
     }
-    //user chose wrong answer
-    else{
-        //wrong++;
-        if(timer>=10){
-        //deduct time from timer
-        timer = timer - 10;
-
-            //add code here to jump to next question 
-            i++;
-            if(i<questions.length){
-                writeQuestion();
-            }
-            else{
-                endQuiz();
-            }
-            
-
-        }
-        else{
-            timer = 0;
-        }
+  }
+  //user chose wrong answer
+  else {
+      //deduct time from timer if it 10 seconds or more remaining
+    if (timer >= 10) {
+      //deduct 10 seconds from the timer 
+      timer = timer - 10;
+    } else {
+        //timer has less than 10 seconds left so set timer to zero
+      timer = 0;
     }
-    
+    //go on to the next question
+    i++;
+    //there are still questions in the quiz so write the next question
+      if (i < questions.length) {
+        writeQuestion();
+      } 
+      //this is the last question so end the quiz
+      else {
+        endQuiz();
+      }
+  }
 }
 
-function writeQuestion(){
-    questionText.textContent = questions[i].question;
-    firstChoiceBtn.textContent = questions[i].answerA;
-    secondChoiceBtn.textContent = questions[i].answerB;
-    thirdChoiceBtn.textContent = questions[i].answerC;
-    fourthChoiceBtn.textContent = questions[i].answerD;
-    firstChoiceBtn.style.background = "darkgreen";
-    secondChoiceBtn.style.background = "darkgreen";
-    thirdChoiceBtn.style.background = "darkgreen";
-    fourthChoiceBtn.style.background = "darkgreen";
-    firstChoiceBtn.style.color = "khaki";
-    secondChoiceBtn.style.color = "khaki";
-    thirdChoiceBtn.style.color = "khaki";
-    fourthChoiceBtn.style.color = "khaki";
+//function to write the current question to the HTML page
+function writeQuestion() {
+    //write the text of the question
+  questionText.textContent = questions[i].question;
+  //write the first choice
+  firstChoiceBtn.textContent = questions[i].answerA;
+  //write the second choice
+  secondChoiceBtn.textContent = questions[i].answerB;
+  //write the third choice
+  thirdChoiceBtn.textContent = questions[i].answerC;
+  //write the fourth choice
+  fourthChoiceBtn.textContent = questions[i].answerD;
+  //change styling of the answer buttons
+  firstChoiceBtn.style.background = "darkgreen";
+  secondChoiceBtn.style.background = "darkgreen";
+  thirdChoiceBtn.style.background = "darkgreen";
+  fourthChoiceBtn.style.background = "darkgreen";
+  firstChoiceBtn.style.color = "khaki";
+  secondChoiceBtn.style.color = "khaki";
+  thirdChoiceBtn.style.color = "khaki";
+  fourthChoiceBtn.style.color = "khaki";
 }

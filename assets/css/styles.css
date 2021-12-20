@@ -68,3 +68,18 @@ button:hover{
   #countdown{
       display: none;
   }
+
+  .highScoresStyling{
+      font-size: 60px;
+      font-style: italic;
+      font-weight: bold;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  .highScoresStyling li:nth-child( odd ) {
+    color: darkblue;
+}
+
+#title{
+    font-size: 100px;
+}
