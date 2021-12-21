@@ -124,6 +124,10 @@ function endQuiz() {
   clearInterval(clearTime);
   //change styling of current score to be visible to show user his/her score
   endQuizContainer.style.display = "block";
+  endQuizContainer.style.display = "grid";
+  endQuizContainer.style.gap = "20px";
+  endQuizContainer.style.gridTemplateColumns = "1fr 1fr";
+  //endQuizContainer.style.minWidth = "300px";
   //display the number of correct answers to the user
   document.getElementById("correctAnswers").textContent = "" + right;
   //change styling of the timer to be invisible

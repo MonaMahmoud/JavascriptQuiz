@@ -90,3 +90,11 @@ button:hover{
 #title{
     font-size: 100px;
 }
+
+/* input{
+    width: 200px;
+} */
+#endQuizContainer{
+    font-size: xx-large;
+    font-weight: bold;
+}
