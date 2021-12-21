@@ -1,30 +1,4 @@
-var questions = [
-  {
-    question: "Which of the following is not JavaScript Data Types?",
-    answerA: "Undefined",
-    answerB: "Float",
-    answerC: "Boolean",
-    answerD: "Number",
-    correctAnswer: "B",
-  },
-  {
-    question: "What are the types of Pop up boxes available in JavaScript?",
-    answerA: "Prompt",
-    answerB: "Alert",
-    answerC: "Confirm",
-    answerD: "All of the above",
-    correctAnswer: "D",
-  },
-  {
-    question:
-      "How to write an IF statement for executing some code if 'i is NOT equal to 5'?",
-    answerA: "if(i <> 5)",
-    answerB: "if i <> 5",
-    answerC: "if ( i != 5 )",
-    answerD: "if i != 5 then",
-    correctAnswer: "C",
-  },
-];
+
 
 var startBtn = document.getElementById("startBtn");
 var questionText = document.getElementById("question");
@@ -155,7 +129,7 @@ function endQuiz() {
   //change styling of the timer to be invisible
   countDownSpan.style.display = "none";
   //change the current title of the page
-  currentTitle.textContent = "Save your score!";
+  currentTitle.textContent = "Save Your Score!";
 }
 
 //function to check whether user chose a correct or wrong answer
