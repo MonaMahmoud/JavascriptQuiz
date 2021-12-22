@@ -18,7 +18,7 @@ var i = 0;
 var right = 0;
 var wrong = 0;
 var clearTime;
-var timer = 120;
+var timer = 180;
 var highScores = [];
 
 //add event handler to the start quiz button
@@ -36,7 +36,14 @@ function decTimer() {
   //change display property of the timer to be visible
   countDownSpan.style.display = "block";
   //update timer text to show number of seconds remaining
-  countDownSpan.textContent = "Time: " + timer;
+  //countDownSpan.textContent = "Time: " + timer;
+  if(timer%60<10){
+    countDownSpan.textContent = "Time 0" + parseInt(timer/60) +":0" + timer%60;  
+  }
+  else{
+    countDownSpan.textContent = "Time 0" + parseInt(timer/60)  +":"+ timer%60;
+  }
+  
   //there is still time: continue quiz
   if (timer > 0) {
     timer--;

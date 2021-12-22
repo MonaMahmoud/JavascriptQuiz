@@ -42,6 +42,10 @@ div{
     margin: auto;
     background-color: darkgreen;
     color: khaki;
+
+}
+.answerBtn:hover{
+    cursor: pointer;
 }
 
 #answerList{
@@ -91,9 +95,6 @@ button:hover{
     font-size: 100px;
 }
 
-/* input{
-    width: 200px;
-} */
 #endQuizContainer{
     font-size: xx-large;
     font-weight: bold;
